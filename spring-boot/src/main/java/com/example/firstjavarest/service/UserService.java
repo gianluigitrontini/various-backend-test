@@ -21,12 +21,13 @@ public class UserService {
     public Optional<User> getUser(Integer id) {
         Optional<User> optional = Optional.empty();
 
-        List<User> user = jdbcTemplate.query("SELECT * FROM user WHERE id =" + id,
+        List<User> user = jdbcTemplate.query("SELECT * FROM user WHERE id = ?",
                 (resultSet, rowNum) -> new User(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("password")));
+                        resultSet.getString("password")),
+                id);
 
         if (!user.get(0).equals(null)) {
             optional = Optional.of(user.get(0));
