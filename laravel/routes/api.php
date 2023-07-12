@@ -15,5 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::get('/hello', function () {
+  return "Hello World!";
+});
+
+Route::post('/reverse-me', function (Request $request) {
+  $reversed = strrev($request->input('reverse_this'));
+  return $reversed;
+});
+
+Route::get('/reverse-me', function (Request $request) {
+  $reversed = strrev($request->input('reverse_this'));
+  return $reversed;
 });
